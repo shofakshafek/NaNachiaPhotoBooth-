@@ -1,0 +1,54 @@
+/* --- Container Animasi Belakang --- */
+.animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Supaya tidak mengganggu klik pada aplikasi */
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* --- Animasi Awan Bergerak --- */
+.cloud {
+    position: absolute;
+    opacity: 0.4;
+    font-size: 2.5rem;
+    user-select: none;
+    animation: moveClouds linear infinite;
+}
+
+.cloud-1 { top: 10%; scale: 1; animation-duration: 35s; }
+.cloud-2 { top: 25%; scale: 1.4; opacity: 0.2; animation-duration: 50s; animation-delay: -15s; }
+.cloud-3 { top: 60%; scale: 0.8; animation-duration: 28s; animation-delay: -5s; }
+
+@keyframes moveClouds {
+    0% { left: -100px; }
+    100% { left: 100vw; }
+}
+
+/* --- Animasi Kelopak Sakura Jatuh --- */
+.sakura-petal {
+    position: absolute;
+    background: linear-gradient(135deg, #ffb7c5, #ffccd5);
+    border-radius: 15% 70% 15% 70%; /* Bentuk Kelopak Bunga */
+    opacity: 0.7;
+    user-select: none;
+    pointer-events: none;
+    animation: fallAndSway linear infinite;
+}
+
+@keyframes fallAndSway {
+    0% {
+        top: -20px;
+        transform: translateX(0) rotate(0deg);
+    }
+    50% {
+        transform: translateX(80px) rotate(180deg);
+    }
+    100% {
+        top: 105vh;
+        transform: translateX(-20px) rotate(360deg);
+    }
+}

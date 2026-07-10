@@ -1,0 +1,149 @@
+/* --- Reset & Base Styling --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, .panda-logo {
+    font-family: 'Fredoka', sans-serif;
+}
+
+/* --- Variabel Tema & Warna --- */
+:root[data-theme="light"] {
+    --bg-app: linear-gradient(135deg, #fff0f5 0%, #e0f7fa 100%);
+    --bg-card: rgba(255, 255, 255, 0.45);
+    --border-card: rgba(255, 255, 255, 0.6);
+    --text-primary: #4a4a4a;
+    --text-muted: #7d7d7d;
+    --accent-color: #ffb7c5; /* Pink Sakura */
+    --accent-mint: #b2dfdb;
+    --shadow-color: rgba(255, 183, 197, 0.2);
+    --glass-blur: blur(12px);
+}
+
+:root[data-theme="dark"] {
+    --bg-app: linear-gradient(135deg, #1a1625 0%, #0d1b2a 100%);
+    --bg-card: rgba(30, 27, 43, 0.5);
+    --border-card: rgba(255, 255, 255, 0.12);
+    --text-primary: #f0f0f5;
+    --text-muted: #a0a0b0;
+    --accent-color: #ff8fa3; /* Pink Neon Lembut */
+    --accent-mint: #4db6ac;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --glass-blur: blur(15px);
+}
+
+body {
+    background: var(--bg-app);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    transition: background 0.5s ease, color 0.3s ease;
+}
+
+/* --- Layout Kontainer Utama --- */
+.app-container {
+    width: 100%;
+    max-width: 480px; /* Di-lock seukuran layar HP agar estetik di desktop maupun mobile */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- Header Section --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-area h1 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.logo-area h1 span {
+    color: var(--accent-color);
+}
+
+.panda-logo {
+    font-size: 1.5rem;
+}
+
+/* --- Main Viewport Section --- */
+.app-main {
+    flex: 1;
+    display: flex;
+}
+
+.booth-viewport {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Rasio standar photobooth korea */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.preview-placeholder {
+    text-align: center;
+    padding: 20px;
+}
+
+.panda-placeholder {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.preview-placeholder p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+/* --- Controls Panel Section --- */
+.app-controls {
+    padding: 16px;
+}
+
+.app-controls h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.placeholder-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* --- Footer --- */
+.app-footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: auto;
+    padding: 8px 0;
+}
+
+.app-footer span {
+    font-weight: 700;
+    color: var(--accent-color);
+}

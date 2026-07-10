@@ -1,0 +1,632 @@
+/* --- Glassmorphism Card Base --- */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-card);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Glassmorphism Buttons --- */
+.glass-btn {
+    background: var(--bg-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+}
+
+.btn-primary, .btn-secondary {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+
+/* State Hover & Active Efek Nyaman Di-tap */
+.glass-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.glass-btn:not(:disabled):active {
+    transform: translateY(1px);
+}
+
+.glass-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+/* --- Elemen Video Kamera --- */
+#camera-stream {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #222;
+    border-radius: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* Efek Mirror untuk Kamera Depan (Default) */
+.mirror {
+    transform: scaleX(-1);
+}
+
+/* --- Countdown Overlay --- */
+.countdown-overlay {
+    position: absolute;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 30px var(--accent-color);
+    z-index: 4;
+    pointer-events: none;
+    animation: pulsePop 0.5s ease-out infinite alternate;
+}
+
+.countdown-overlay.hidden {
+    display: none;
+}
+
+@keyframes pulsePop {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* --- Flash Kamera Overlay --- */
+.flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.animate-flash {
+    animation: flashTrigger 0.35s ease-out;
+}
+
+@keyframes flashTrigger {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* --- Struktur UI Controls & Selector --- */
+.mode-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.selector-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.mode-options {
+    display: flex;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px;
+    border-radius: 12px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+:root[data-theme="dark"] .mode-options {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-mode {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-mode.active {
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    color: var(--accent-color);
+}
+
+/* --- Tombol Shutter Utama --- */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-shutter {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #ffcbd5 100%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-shutter:hover {
+    transform: scale(1.05);
+}
+
+.btn-shutter:active {
+    transform: scale(0.95);
+}
+
+.btn-shutter:disabled {
+    background: #ccc;
+    border-color: #eee;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+/* --- Elemen Video Kamera --- */
+#camera-stream {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #222;
+    border-radius: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* Efek Mirror untuk Kamera Depan (Default) */
+.mirror {
+    transform: scaleX(-1);
+}
+
+/* --- Countdown Overlay --- */
+.countdown-overlay {
+    position: absolute;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 30px var(--accent-color);
+    z-index: 4;
+    pointer-events: none;
+    animation: pulsePop 0.5s ease-out infinite alternate;
+}
+
+.countdown-overlay.hidden {
+    display: none;
+}
+
+@keyframes pulsePop {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* --- Flash Kamera Overlay --- */
+.flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.animate-flash {
+    animation: flashTrigger 0.35s ease-out;
+}
+
+@keyframes flashTrigger {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* --- Struktur UI Controls & Selector --- */
+.mode-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.selector-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.mode-options {
+    display: flex;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px;
+    border-radius: 12px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+:root[data-theme="dark"] .mode-options {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-mode {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-mode.active {
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    color: var(--accent-color);
+}
+/* --- Modal Overlay & Animasi Pop Up --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalSlideUp {
+    0% { transform: translateY(30px) scale(0.95); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.btn-close:hover {
+    color: var(--accent-color);
+}
+
+/* --- Wadah Pratinjau Canvas Strip --- */
+.modal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    align-items: center;
+}
+
+.canvas-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.03);
+    padding: 10px;
+    border-radius: 16px;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+#photostrip-canvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* --- Pemilih Palet Warna Frame --- */
+.frame-selector-area {
+    width: 100%;
+    text-align: center;
+}
+
+.frame-selector-area p {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+.frame-options {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.btn-frame-opt {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.btn-frame-opt.active {
+    transform: scale(1.15);
+    border-color: var(--text-primary);
+}
+
+.modal-footer {
+    width: 100%;
+}
+/* --- Mode Tampilan View Swap --- */
+.editor-section-view {
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.editor-section-view.hidden {
+    display: none !important;
+}
+
+.section-subtitle {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 12px 0 8px 0;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* --- Preset Filter Buttons --- */
+.filter-presets {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.btn-preset {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-card);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+:root[data-theme="dark"] .btn-preset {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-preset.active {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+/* --- Kustomisasi Sliders Kontrol --- */
+.sliders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+.slider-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.slider-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 80px;
+    color: var(--text-primary);
+}
+
+.slider-group input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+:root[data-theme="dark"] .slider-group input[type="range"] {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Bulatan Slider (Thumb) yang Nyaman Di-slide di HP */
+.slider-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.1s;
+}
+
+.slider-group input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(1.3);
+}
+/* --- Input Teks Kustom & Color Picker --- */
+.text-input-group {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+#input-custom-text {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid var(--border-card);
+    border-radius: 12px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+#input-text-color {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 42px;
+    height: 42px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+}
+
+#input-text-color::-webkit-color-swatch {
+    border-radius: 12px;
+    border: 2px solid var(--border-card);
+}
+
+/* --- Grid Menu Pilihan Stiker --- */
+.sticker-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.btn-sticker {
+    font-size: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-sticker:hover {
+    transform: scale(1.15);
+}
+
+.btn-sticker:active {
+    transform: scale(0.9);
+}
+/* --- Pemilih Layout Cetak PRO --- */
+.layout-options {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.btn-layout {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-card);
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+:root[data-theme="dark"] .btn-layout {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-layout.active {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
