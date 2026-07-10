@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaNachiaPhotoBooth PRO by shfq</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <div id="animation-container" class="animation-container">
+        <div class="cloud cloud-1">☁️</div>
+        <div class="cloud cloud-2">☁️</div>
+        <div class="cloud cloud-3">☁️</div>
+    </div>
+
+    <div class="app-container">
+        
+        <header class="app-header glass-card">
+            <div class="logo-area">
+                <span class="panda-logo">🐼</span>
+                <h1>NaNachia<span>Booth PRO</span></h1>
+            </div>
+            <button id="theme-toggle" class="btn-icon glass-btn" aria-label="Toggle Theme">
+                <span class="mode-icon">🌙</span>
+            </button>
+        </header>
+
+        <main class="app-main">
+            <div class="booth-viewport glass-card">
+                <video id="camera-stream" autoplay playsinline muted></video>
+                <div id="countdown-overlay" class="countdown-overlay hidden">3</div>
+                <div id="flash-overlay" class="flash-overlay"></div>
+            </div>
+        </main>
+
+        <aside class="app-controls glass-card">
+            <div class="mode-selector">
+                <span class="selector-title">Jumlah Foto 🐼</span>
+                <div class="mode-options">
+                    <button class="btn-mode active" data-photos="1">1</button>
+                    <button class="btn-mode" data-photos="2">2</button>
+                    <button class="btn-mode" data-photos="4">4</button>
+                    <button class="btn-mode" data-photos="6">6</button>
+                </div>
+            </div>
+
+            <div class="mode-selector" style="margin-top: 10px;">
+                <span class="selector-title">Layout Cetak 📐</span>
+                <div class="layout-options">
+                    <button class="btn-layout active" data-layout="strip">Vertikal Strip</button>
+                    <button class="btn-layout" data-layout="grid">2x2 Grid (4 Foto)</button>
+                </div>
+            </div>
+
+            <div class="action-buttons" style="margin-top: 15px;">
+                <button id="btn-switch" class="btn-icon glass-btn" title="Ganti Kamera">🔄</button>
+                <button id="btn-shutter" class="btn-shutter" title="Ambil Foto">📸</button>
+                <button id="btn-next-part" class="btn-icon glass-btn" disabled title="Lihat Hasil Frame">✨</button>
+            </div>
+        </aside>
+
+        <footer class="app-footer">
+            <p>NaNachiaPhotoBooth by <span>shfq</span> &copy; 2026</p>
+        </footer>
+
+    </div>
+
+    <div id="result-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2 id="modal-title">Pratinjau Cetak Strip 🎀</h2>
+                <button id="btn-close-modal" class="btn-close">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="canvas-container">
+                    <canvas id="photostrip-canvas"></canvas>
+                </div>
+                
+                <div id="view-frame-select" class="editor-section-view">
+                    <p class="section-subtitle">Pilih Tema Frame Panda:</p>
+                    <div class="frame-options">
+                        <button class="btn-frame-opt active" data-frame="pink" style="background: #ffcbd5;"></button>
+                        <button class="btn-frame-opt" data-frame="mint" style="background: #b2dfdb;"></button>
+                        <button class="btn-frame-opt" data-frame="blue" style="background: #bbdefb;"></button>
+                        <button class="btn-frame-opt" data-frame="dark" style="background: #263238;"></button>
+                    </div>
+                </div>
+
+                <div id="view-filter-edit" class="editor-section-view hidden">
+                    <p class="section-subtitle">Gaya Filter Cepat 🎨</p>
+                    <div class="filter-presets">
+                        <button class="btn-preset active" data-preset="normal">Normal</button>
+                        <button class="btn-preset" data-preset="vintage">Vintage</button>
+                        <button class="btn-preset" data-preset="bw">B&W</button>
+                        <button class="btn-preset" data-preset="cool">Cool</button>
+                    </div>
+                    
+                    <p class="section-subtitle">Manual Adjustment 🎛️</p>
+                    <div class="sliders-list">
+                        <div class="slider-group">
+                            <label>Kecerahan</label>
+                            <input type="range" id="slider-brightness" min="50" max="150" value="100">
+                        </div>
+                        <div class="slider-group">
+                            <label>Kontras</label>
+                            <input type="range" id="slider-contrast" min="50" max="150" value="100">
+                        </div>
+                        <div class="slider-group">
+                            <label>Saturasi</label>
+                            <input type="range" id="slider-saturation" min="0" max="200" value="100">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="view-sticker-text" class="editor-section-view hidden">
+                    <p class="section-subtitle">Tambah Teks Kustom ✍️</p>
+                    <div class="text-input-group">
+                        <input type="text" id="input-custom-text" placeholder="Ketik tulisan di sini..." maxlength="30">
+                        <input type="color" id="input-text-color" value="#ffffff">
+                    </div>
+                    <div class="sliders-list" style="margin-top: 8px;">
+                        <div class="slider-group">
+                            <label>Posisi X</label>
+                            <input type="range" id="slider-text-x" min="0" max="100" value="50">
+                        </div>
+                        <div class="slider-group">
+                            <label>Posisi Y</label>
+                            <input type="range" id="slider-text-y" min="0" max="100" value="85">
+                        </div>
+                    </div>
+
+                    <p class="section-subtitle">Tempel Stiker Lucu 🧸</p>
+                    <div class="sticker-grid">
+                        <button class="btn-sticker" data-emoji="❤️">❤️</button>
+                        <button class="btn-sticker" data-emoji="🎀">🎀</button>
+                        <button class="btn-sticker" data-emoji="✨">✨</button>
+                        <button class="btn-sticker" data-emoji="🐱">🐱</button>
+                        <button class="btn-sticker" data-emoji="🧁">🧁</button>
+                        <button class="btn-sticker" data-emoji="🐾">🐾</button>
+                        <button id="btn-clear-stickers" class="btn-preset" style="background:#ff8fa3; color:#fff;">Reset ❌</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-primary glass-btn" id="btn-toggle-view">Lanjut Editor Filter 🎨</button>
+                <button class="btn-secondary glass-btn hidden" id="btn-to-part6" disabled>Simpan & Unduh Foto 💾</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/camera.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
